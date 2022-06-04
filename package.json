@@ -1,0 +1,11 @@
+{
+  "name": "kingdom-bot",
+  "author": "Ahmed Alkooheji",
+  "main": "bot.js",
+  "version": "2.1.1",
+  "dependencies": {
+    "discord.js": "^13.7.0",
+    "fstorm": "latest",
+    "jimp": "latest"
+  }
+}
