@@ -7,6 +7,7 @@
     "discord.js": "^13.7.0",
     "fstorm": "latest",
     "jimp": "latest",
+    "node-fetch": "^3.2.5",
     "svg2img": "^1.0.0-beta.1"
   }
 }
