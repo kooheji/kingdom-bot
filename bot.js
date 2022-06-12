@@ -1,11 +1,11 @@
 /******************************************************
  * Discord Bot Maker Bot
- * Version 2.1.3
+ * Version 2.1.4
  * Robert Borghese
  ******************************************************/
 
 const DBM = {};
-DBM.version = "2.1.3";
+DBM.version = "2.1.4";
 
 const DiscordJS = (DBM.DiscordJS = require("discord.js"));
 
@@ -1518,6 +1518,12 @@ Actions.displayError = function (data, cache, err) {
 };
 
 Actions.getParameterFromInteraction = function (interaction, name) {
+  if (interaction.__originalInteraction) {
+    const result = this.getParameterFromInteraction(interaction.__originalInteraction, name);
+    if (result !== null) {
+      return result;
+    }
+  }
   if (interaction?.options?.get) {
     const option = interaction.options.get(name.toLowerCase());
     return this.getParameterFromParameterData(option);

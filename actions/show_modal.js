@@ -54,7 +54,7 @@ module.exports = {
   // This will make it so the patch version (0.0.X) is not checked.
   //---------------------------------------------------------------------
 
-  meta: { version: "2.1.3", preciseCheck: true, author: null, authorUrl: null, downloadUrl: null },
+  meta: { version: "2.1.4", preciseCheck: true, author: null, authorUrl: null, downloadUrl: null },
 
   //---------------------------------------------------------------------
   // Action Fields
@@ -64,10 +64,7 @@ module.exports = {
   // are also the names of the fields stored in the action's JSON data.
   //---------------------------------------------------------------------
 
-  fields: [
-    "title",
-    "textInputs"
-  ],
+  fields: ["title", "textInputs"],
 
   //---------------------------------------------------------------------
   // Command HTML
@@ -215,11 +212,12 @@ module.exports = {
 
         const modalData = {
           customId: cache.interaction.id,
-          title: data.title,
+          title: this.evalMessage(data.title, cache),
           components: componentsArr
         };
 
         this.registerModalSubmitResponses(cache.interaction.id, (newInteraction) => {
+          newInteraction.__originalInteraction = cache.interaction;
           cache.interaction = newInteraction;
 
           for (let i = 0; i < tempVariableNames.length; i++) {
@@ -237,7 +235,7 @@ module.exports = {
 
       } else {
 
-        this.displayError(data, cache, "Cannot show modal multiple times.");
+        this.displayError(data, cache, "Cannot show modal from current interaction, perhaps attempting to show modal multiple times?");
         this.callNextAction(cache);
 
       }
